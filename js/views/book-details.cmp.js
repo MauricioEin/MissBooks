@@ -3,7 +3,7 @@ import reviewAdd from '../cmps/review-add.cmp.js'
 import bookReviews from '../cmps/book-reviews.cmp.js'
 
 import { bookService } from "../services/book-service.js"
-import { eventBus } from '../services/event-bus.service.js'
+import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 
 export default {
@@ -15,6 +15,7 @@ export default {
             <button class="close-details-btn">
                 <router-link to="/book">x</router-link>
             </button>
+
             <h2 v-if="book.listPrice.isOnSale">🌟SALE!🌟</h2>
             <h5 :class="styleClass">{{formattedPrice}}</h5>
             <h1>{{book.title}}</h1>
@@ -31,6 +32,11 @@ export default {
             <ul class="categories">
                 <li v-for="category in book.categories">{{category}}</li>
             </ul>
+            <div class="book-links">
+                <router-link v-if="prevBookId" :to="'/book/' + prevBookId">Previous book</router-link>
+                <p v-else></p>
+                <router-link v-if="nextBookId" :to="'/book/' + nextBookId">Next book</router-link>
+            </div>
         </div>
         <review-add :book="book" @sendReview="sendReview"/>
         </div>
@@ -40,16 +46,19 @@ export default {
     data() {
         return {
             isLongText: false,
-            book: null
+            book: null,
+            prevBookId: null,
+            nextBookId: null,
         }
     },
     created() {
-        const id = this.$route.params.id
-        bookService.get(id)
-            .then(book => this.book = book)
-
+        this.loadBook()
     },
     computed: {
+        bookId() {
+            const id = this.$route.params.id || this.book.id
+            return id
+        },
         formattedLength() {
             const pages = this.book.pageCount
             if (pages > 500) return pages + ' pages - Long reading'
@@ -74,25 +83,41 @@ export default {
         },
     },
     methods: {
+        loadBook() {
+            bookService.get(this.bookId)
+                .then(book => {
+                    this.book = book
+                    bookService.getPrevNextIds(book.id)
+                        .then(ids => {
+                            console.log('nbrIds:', ids)
+                            this.prevBookId = ids.prev
+                            this.nextBookId = ids.next
+                        })
+                })
+                .catch(err => showErrorMsg('Cannot load book'))
+
+        },
         sendReview(review) {
             bookService.addReview(this.book, review)
                 .then(() => {
-                    const msg = {
-                        txt: `review added`,
-                        type: 'success',
-                    }
-                    eventBus.emit('user-msg', msg)
+                    showSuccessMsg(`review added`)
                 })
+                .catch(err => {
+                    console.log('OOps:', err)
+                    showErrorMsg(`Cannot add review`)
+                })
+
         },
         deleteReview(reviewId) {
             bookService.deleteReview(this.book, reviewId)
                 .then(() => {
-                    const msg = {
-                        txt: `review deleted`,
-                        type: 'success',
-                    }
-                    eventBus.emit('user-msg', msg)
+                    showSuccessMsg(`review deleted`)
                 })
+                .catch(err => {
+                    console.log('OOps:', err)
+                    showErrorMsg(`Cannot delete review`)
+                })
+
 
         }
     },
@@ -103,5 +128,10 @@ export default {
         longText,
         reviewAdd,
         bookReviews
+    },
+    watch: {
+        bookId() {
+            this.loadBook()
+        }
     }
 }

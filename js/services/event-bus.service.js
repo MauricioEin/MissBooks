@@ -18,10 +18,12 @@ export const eventBus = createEventEmitter(() => console.log('No handler associa
 
 
 export function showUserMsg(msg) {
-    eventBus.emit('show-msg', msg)
+    console.log('emitting', msg)
+    eventBus.emit('user-msg', msg)
 }
 
 export function showSuccessMsg(txt) {
+    console.log('success')
     showUserMsg({txt, type: 'success'})
 }
 export function showErrorMsg(txt) {

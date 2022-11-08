@@ -10,6 +10,7 @@ export const bookService = {
   get,
   addReview,
   deleteReview,
+  getPrevNextIds,
   // remove,
   // save,
   // getEmptyCar,
@@ -29,15 +30,28 @@ function get(bookId) {
   return storageService.get(BOOKS_KEY, bookId)
 }
 
+function getPrevNextIds(bookId) {
+  return storageService.query(BOOKS_KEY)
+    .then(books => {
+      const idx = books.findIndex(book => book.id === bookId)
+      const prevIdx = idx - 1
+      const nextIdx = idx + 1
+      return {
+        prev: books[prevIdx]? books[prevIdx].id : null,
+        next: books[nextIdx]? books[nextIdx].id : null
+      }
+    })
+
+
+}
+
 function addReview(book, review) {
-  // console.log('adding review to', book.title, review)
   review.id = utilService.makeId()
   book.reviews ? book.reviews.push(review) : book.reviews = [review]
   return storageService.put(BOOKS_KEY, book)
 }
 
 function deleteReview(book, reviewId) {
-  // console.log('deleting', reviewId, 'from', book.title)
   book.reviews = book.reviews.filter(review => review.id !== reviewId)
   return storageService.put(BOOKS_KEY, book)
 }

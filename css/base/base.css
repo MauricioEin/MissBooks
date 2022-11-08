@@ -27,6 +27,7 @@ body {
 
 .app-header {
     justify-content: space-between;
+    height:9vh;
 }
 
 .app-header nav * {
@@ -38,7 +39,7 @@ body {
 .home-page,
 .about-page,
 .book-details {
-    min-height: 88vh;
+    min-height: 85vh;
     background-color: rgb(208, 237, 215);
     padding: 10px;
 }

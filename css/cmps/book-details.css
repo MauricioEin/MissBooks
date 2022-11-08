@@ -45,3 +45,8 @@
     color: limegreen;
 
 }
+
+.book-links {
+    display:flex;
+    justify-content: space-between;
+}
