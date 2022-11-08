@@ -27,7 +27,7 @@ body {
 
 .app-header {
     justify-content: space-between;
-    height:9vh;
+    height: 9vh;
 }
 
 .app-header nav * {
@@ -38,7 +38,8 @@ body {
 .book-app,
 .home-page,
 .about-page,
-.book-details {
+.book-details,
+.add-books {
     min-height: 85vh;
     background-color: rgb(208, 237, 215);
     padding: 10px;
@@ -57,4 +58,28 @@ select {
     padding: 3px 6px;
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.327);
+}
+
+
+.home-page {
+    text-align: center;
+}
+
+.home-page h2 {
+    color: white;
+    font-size: 20vw;
+    position: fixed;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0.8;
+    text-shadow: -7px 7px 5px rgba(0,0,0,0.63);}
+
+
+.home-page img {
+width:100%;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.622);
+    margin-top:10px;
 }

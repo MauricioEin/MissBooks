@@ -8,7 +8,7 @@ import bookList from '../cmps/book-list.cmp.js'
 export default {
     template: `
         <section class="book-app">
-            <book-filter v-if="!selectedBook" @filtered="setFilter"/>
+            <book-filter @filtered="setFilter"/>
             <book-list v-if="books" :books="booksToShow"/>
         </section>
     `,

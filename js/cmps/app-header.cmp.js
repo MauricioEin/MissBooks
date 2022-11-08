@@ -6,6 +6,7 @@ export default {
                 <router-link to="/">Home</router-link>
                 <router-link to="/book">Books</router-link>
                 <router-link to="/about">About</router-link>
+                <router-link to="/add">Add books</router-link>
             </nav>
         </header>
     `,

@@ -12,9 +12,10 @@ export default {
                 </li>
             </ul>
             <p v-else>Be the first to post a review!</p>
+        </section>
     `,
     methods: {
-        onDelete(reviewId){
+        onDelete(reviewId) {
             this.$emit('delete', reviewId)
         }
     },

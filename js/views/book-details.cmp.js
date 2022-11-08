@@ -3,12 +3,13 @@ import reviewAdd from '../cmps/review-add.cmp.js'
 import bookReviews from '../cmps/book-reviews.cmp.js'
 
 import { bookService } from "../services/book-service.js"
-import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 
 export default {
+    name:'bookDetails',
     template: `
-    <section class="book-details">
+    <section v-if="book" class="book-details">
         <div class="book-details-container">
         <img :src="book.thumbnail"/>
         <div clas="book-info">
@@ -41,7 +42,7 @@ export default {
         <review-add :book="book" @sendReview="sendReview"/>
         </div>
     </section>
-    <book-reviews @delete="deleteReview" :book="book"/>
+    <book-reviews v-if="book" @delete="deleteReview" :book="book"/>
     `,
     data() {
         return {
