@@ -1,0 +1,10 @@
+
+.book-preview {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.book-preview img {
+    height: 100px;
+}

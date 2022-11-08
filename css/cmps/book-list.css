@@ -1,0 +1,15 @@
+.book-list {
+    background-color: rgb(209, 239, 239);
+    padding: 10px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.book-list li {
+    list-style-type: none;
+    background-color: rgb(134, 220, 192);
+    padding: 10px;
+    border-radius: 8px;
+
+}

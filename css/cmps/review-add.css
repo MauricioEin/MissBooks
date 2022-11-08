@@ -1,0 +1,8 @@
+.review-add {
+    background-color: rgb(143, 214, 190);
+    padding: 10px;
+}
+
+.review-add form * {
+    display: block;
+}

@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+body {
+    margin: 0;
+}
+
+.app-footer,
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6vh;
+    background-color: rgb(65, 110, 110);
+    padding: 10px;
+}
+
+.app-header {
+    justify-content: space-between;
+}
+
+.app-header nav * {
+    margin-inline-start: 10px;
+
+}
+
+.book-app,
+.home-page,
+.about-page,
+.book-details {
+    min-height: 88vh;
+    background-color: rgb(208, 237, 215);
+    padding: 10px;
+}
+
+
+
+.book-filter {
+    text-align: center;
+}
+
+input,
+textarea,
+select {
+    border: 0;
+    padding: 3px 6px;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.327);
+}
